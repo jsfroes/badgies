@@ -4,6 +4,8 @@ const homeController = require("../controllers/home");
 const uploadController = require("../controllers/upload");
 
 let routes = (app) => {
+  router.get("/", homeController.getHome);
+
   router.post("/upload", uploadController.uploadFiles);
   router.get("/files/:user", uploadController.getListFiles);
   // router.get("/files/:name", uploadController.download);

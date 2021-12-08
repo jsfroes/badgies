@@ -14,9 +14,9 @@ initRoutes(app);
 
 const db = require("./config/db");
 
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
-});
+// app.get("/", (req, res) => {
+//   res.json({ message: "Welcome to bezkoder application." });
+// });
 
 mongoose
   .connect(db.url, {
