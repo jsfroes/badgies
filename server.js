@@ -5,7 +5,7 @@ const initRoutes = require("./routes");
 const mongoose = require("mongoose");
 
 var corsOptions = {
-  origin: "http://localhost:8081",
+  origin: true,
 };
 
 app.use(cors(corsOptions));
@@ -26,3 +26,4 @@ let port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log(`Running at localhost:${port}`);
 });
+
