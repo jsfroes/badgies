@@ -8,7 +8,11 @@ var corsOptions = {
   origin: true,
 };
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://streamelements.com",
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 initRoutes(app);
 
