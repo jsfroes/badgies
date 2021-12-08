@@ -1,50 +1,28 @@
-const express = require('express')
-const morgan = require('morgan')
-const cors = require('cors')
-const app = express()
+const cors = require("cors");
+const express = require("express");
+const app = express();
+const initRoutes = require("./routes");
+const mongoose = require("mongoose");
 
-const corsOptions = {
-    origin: "http://localhost:3000"
-  };
+var corsOptions = {
+  origin: "http://localhost:8081",
+};
 
-// use cors options for frontend route
 app.use(cors(corsOptions));
-
-// parse requests of content-type - application/json
-app.use(express.json());
-
-// parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
+initRoutes(app);
 
-// format http server requests
-app.use(morgan('tiny'))
+const db = require("./config/db");
 
-// simple route
-app.get("/", (req, res) => {
-    res.json({ message: "Welcome to badgies application." });
-  });
-
-// connect to the db
-const db = require("./models");
-db.mongoose
+mongoose
   .connect(db.url, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
-  .then(() => {
-    console.log("Connected to the database!");
-  })
-  .catch(err => {
-    console.log("Cannot connect to the database!", err);
-    process.exit();
-  });
+  .then(() => console.log("Successfully connect to MongoDB."))
+  .catch((err) => console.error("Connection error", err));
 
-// connect routes
-require("./routes/badges.routes")(app);
-
-// set port listen to requests
-const PORT = 8080 | process.env.PORT
-app.listen(PORT, () => {
-	console.log(`Server has started on port ${PORT}!`)
-})
-
+let port = 8080;
+app.listen(port, () => {
+  console.log(`Running at localhost:${port}`);
+});
