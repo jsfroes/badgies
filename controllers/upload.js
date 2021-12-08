@@ -41,12 +41,9 @@ const uploadFiles = async (req, res) => {
       images: badges,
     });
 
-    console.log("newUser", newUser);
-
     // json response
     return res.status(200).send({
       message: "Files have been uploaded.",
-      users: uploadedBadges,
     });
   } catch (error) {
     console.log(error);
