@@ -10,7 +10,8 @@ var corsOptions = {
 
 app.use(
   cors({
-    origin: "https://streamelements.com",
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   })
 );
 app.use(express.urlencoded({ extended: true }));
